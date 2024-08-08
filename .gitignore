@@ -1,0 +1,17 @@
+# Exclude Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Exclude build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.log
+
+# Exclude other system files
+.DS_Store
+Thumbs.db
