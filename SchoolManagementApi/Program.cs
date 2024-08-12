@@ -7,6 +7,17 @@ using SchoolManagementApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>  //Manière de me permettre d'envoyer les requetes du front vers le back
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 // Ajouter les services au conteneur.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<SchoolContext>(options =>
@@ -25,6 +36,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+
+app.UseCors("AllowSpecificOrigin");//lié aux requêtes du front
 
 app.UseAuthorization();
 

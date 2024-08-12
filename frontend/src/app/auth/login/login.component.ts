@@ -10,10 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { AuthRoutingModule } from '../auth-routing.module';
-import { RouterOutlet } from '@angular/router';
-import { RouterModule } from '@angular/router';
+
 
 
 
@@ -34,14 +32,13 @@ import { RouterModule } from '@angular/router';
              MatFormFieldModule,
              MatOptionModule, 
              MatIconModule,
-             AuthRoutingModule,
-             RouterOutlet,
-            RouterModule,
-            
-        
+             AuthRoutingModule
           ],
 
-          providers: [AuthService] 
+          providers: [
+            AuthService,
+        
+        ] 
 
 })
 
@@ -51,7 +48,7 @@ export class LoginComponent {
   user: User = { username: '', password: '', role: '' };
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router,private http: HttpClient) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     this.authService.login(this.user).subscribe({
