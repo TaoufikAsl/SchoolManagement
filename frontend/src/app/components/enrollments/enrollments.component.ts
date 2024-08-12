@@ -5,7 +5,9 @@ import { Enrollment } from '../../models/enrollment.model';
 @Component({
   selector: 'app-enrollments',
   templateUrl: './enrollments.component.html',
-  styleUrls: ['./enrollments.component.css']
+  styleUrls: ['./enrollments.component.css'],
+  standalone:true,
+
 })
 export class EnrollmentsComponent implements OnInit {
   enrollments: Enrollment[] = [];

@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-auth',
+  standalone:true,
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })

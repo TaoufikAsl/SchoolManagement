@@ -4,6 +4,7 @@ import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-courses',
+  standalone:true,
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })

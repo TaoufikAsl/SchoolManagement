@@ -6,10 +6,10 @@ import { StudentManagementComponent } from './student-management/student-managem
 import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
-  declarations: [
+  declarations: [/*
     CourseManagementComponent,
     DashboardComponent,
-    StudentManagementComponent
+    StudentManagementComponent*/
   ],
   imports: [
     CommonModule,

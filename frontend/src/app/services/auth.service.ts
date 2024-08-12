@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  
 })
 export class AuthService {
   private apiUrl = 'https://localhost:5001/api/auth';
