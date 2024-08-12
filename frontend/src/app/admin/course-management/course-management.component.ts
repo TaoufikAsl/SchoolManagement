@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./course-management.component.css']
 })
 export class CourseManagementComponent {
-  // Logique pour le composant de gestion des cours
+  //  logique de composant ici
 }

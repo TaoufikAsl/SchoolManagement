@@ -20,6 +20,10 @@ namespace SchoolManagementApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(User user)
         {
+            if (await _context.Users.AnyAsync(u => u.Username == user.Username))
+            {
+                return BadRequest("Username already exists");
+            }
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return Ok(user);
