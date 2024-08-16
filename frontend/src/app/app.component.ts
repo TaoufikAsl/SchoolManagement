@@ -4,6 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -13,8 +16,11 @@ import { RouterModule, RouterOutlet } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
+    CommonModule,
     RouterOutlet,
-    RouterModule
+    RouterModule,
+    HttpClientModule
+    
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -22,4 +28,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'SchoolManagement';
+authService: any;
+logout: any;
 }
