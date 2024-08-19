@@ -1,0 +1,56 @@
+<!-- course.component.html -->
+
+<div class="container">
+    <!-- Formulaire pour créer ou éditer un cours -->
+    <h2>{{ currentCourse.id ? 'Edit Course' : 'Create a New Course' }}</h2>
+    <form #courseForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Course Title</mat-label>
+        <input matInput [(ngModel)]="currentCourse.title" name="title" required />
+        <mat-error *ngIf="courseForm.submitted && !currentCourse.title">Title is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Course Description</mat-label>
+        <textarea matInput [(ngModel)]="currentCourse.description" name="description" required></textarea>
+        <mat-error *ngIf="courseForm.submitted && !currentCourse.description">Description is required</mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" (click)="createOrUpdateCourse()" [disabled]="!courseForm.valid">
+        {{ currentCourse.id ? 'Update Course' : 'Create Course' }}
+      </button>
+    </form>
+  
+    <!-- Message d'erreur si nécessaire -->
+    <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+  
+    <!-- Liste des cours -->
+    <div class="course-list" *ngIf="courses.length > 0">
+      <h2>Available Courses</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let course of courses">
+          <div class="course-item">
+            <strong>{{ course.title }}</strong>
+            <p>{{ course.description }}</p>
+          </div>
+  
+          <!-- Boutons d'actions -->
+          <button mat-button color="accent" (click)="editCourse(course)">
+            Edit
+          </button>
+          <button mat-button *ngIf="course.id !== undefined" color="warn" (click)="deleteCourse(course.id)">
+            Delete
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  
+    <!-- Affichage si aucun cours n'est disponible -->
+    <div *ngIf="courses.length === 0 && !loading">
+      <p>No courses available.</p>
+    </div>
+  
+    <!-- Indicateur de chargement -->
+    <mat-spinner *ngIf="loading"></mat-spinner>
+  </div>
+  

@@ -1,0 +1,6 @@
+2024-08-19 12:43:32.524 +02:00 [WRN] The foreign key property 'Student.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2024-08-19 13:01:22.858 +02:00 [INF] Login attempt for user: student
+2024-08-19 13:01:24.088 +02:00 [INF] GetCourses called
+2024-08-19 13:01:24.090 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-19 13:02:25.386 +02:00 [INF] GetCourses called
+2024-08-19 13:02:25.389 +02:00 [INF] User null with roles student is attempting to access /courses

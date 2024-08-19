@@ -1,0 +1,38 @@
+<h2>Liste des Cours Disponibles</h2>
+
+<div *ngFor="let course of courses">
+  <h4>{{ course.title }}</h4>
+  <p>{{ 'Description: '+course.description }}</p>
+  <button *ngIf="userRole === 'student'" (click)="enrollStudent(course.id)">S'inscrire</button>
+  <button (click)="unenroll(course.id)">Se désinscrire</button>
+</div>
+
+<h2>Vos Cours Inscrits</h2>
+
+<div *ngIf="enrolledCourses.length > 0">
+  <div *ngFor="let course of enrolledCourses">
+    <h3>{{ course.title }}</h3>
+    <p>{{ course.description }}</p>
+  </div>
+</div>
+<div *ngIf="enrolledCourses.length === 0">
+  <p>Vous n'êtes inscrit à aucun cours pour le moment.</p>
+</div>
+
+<!-- Formulaire pour créer un nouveau cours, visible uniquement pour les instructeurs -->
+<div *ngIf="isInstructor">
+  <h3>Créer un nouveau cours</h3>
+  <form #courseForm="ngForm" (ngSubmit)="createCourse(courseForm)">
+    <mat-form-field appearance="fill">
+      <mat-label>Titre du cours</mat-label>
+      <input matInput name="title" [(ngModel)]="newCourse.title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput name="description" [(ngModel)]="newCourse.description" required></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">Créer</button>
+  </form>
+</div>

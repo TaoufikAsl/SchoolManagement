@@ -1,0 +1,27 @@
+<div *ngIf="course; else loading">
+  <h2>{{ course.title }}</h2>
+  <p><strong>Description:</strong> {{ course.description }}</p>
+  <p><strong>Instructor ID:</strong> {{ course.instructorId }}</p>
+
+  <!-- Boutons pour les utilisateurs ayant les rôles appropriés -->
+  <div *ngIf="isInstructorOrAdmin">
+    <button mat-raised-button color="primary" (click)="editCourse()">Edit Course</button>
+    <button mat-raised-button color="warn" (click)="deleteCourse()">Delete Course</button>
+  </div>
+
+  <!-- Bouton d'inscription pour les étudiants -->
+  <div *ngIf="isStudent && !isInstructorOrAdmin">
+    <button mat-raised-button color="accent" (click)="enrollInCourse()">Enroll in Course</button>
+  </div>
+</div>
+
+<!-- Template de chargement -->
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+  <p>Loading course details...</p>
+</ng-template>
+
+<!-- Template d'erreur -->
+<div *ngIf="errorMessage">
+  <p class="error">{{ errorMessage }}</p>
+</div>

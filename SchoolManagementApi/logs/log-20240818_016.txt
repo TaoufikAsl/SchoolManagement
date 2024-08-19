@@ -1,0 +1,40 @@
+2024-08-18 23:01:30.787 +02:00 [INF] Login attempt for user: student
+2024-08-18 23:01:31.924 +02:00 [INF] GetCourses called
+2024-08-18 23:01:31.927 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:05:59.752 +02:00 [INF] GetCourses called
+2024-08-18 23:05:59.754 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:03.641 +02:00 [INF] GetCourses called
+2024-08-18 23:06:03.642 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:05.860 +02:00 [INF] GetCourses called
+2024-08-18 23:06:05.862 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:13.632 +02:00 [INF] GetCourses called
+2024-08-18 23:06:13.633 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:15.776 +02:00 [INF] GetCourses called
+2024-08-18 23:06:15.777 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:41.554 +02:00 [INF] GetCourses called
+2024-08-18 23:06:41.555 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:50.967 +02:00 [INF] GetCourses called
+2024-08-18 23:06:50.973 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:06:53.756 +02:00 [INF] GetCourses called
+2024-08-18 23:06:53.759 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:07:19.489 +02:00 [INF] GetCourses called
+2024-08-18 23:07:19.491 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:07:26.403 +02:00 [INF] GetCourses called
+2024-08-18 23:07:26.406 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:08:54.817 +02:00 [INF] GetCourses called
+2024-08-18 23:08:54.820 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:12:04.740 +02:00 [INF] GetCourses called
+2024-08-18 23:12:04.748 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:12:06.759 +02:00 [INF] GetCourses called
+2024-08-18 23:12:06.763 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:12:12.675 +02:00 [INF] GetCourses called
+2024-08-18 23:12:12.679 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:12:31.752 +02:00 [INF] GetCourses called
+2024-08-18 23:12:31.755 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:13:00.362 +02:00 [INF] GetCourses called
+2024-08-18 23:13:00.370 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:13:10.317 +02:00 [INF] GetCourses called
+2024-08-18 23:13:10.318 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-18 23:39:04.271 +02:00 [INF] Login attempt for user: student
+2024-08-18 23:39:05.317 +02:00 [INF] GetCourses called
+2024-08-18 23:39:05.319 +02:00 [INF] User null with roles student is attempting to access /courses

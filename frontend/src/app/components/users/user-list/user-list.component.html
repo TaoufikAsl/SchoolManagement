@@ -1,0 +1,42 @@
+<h2>User List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.role }}</td>
+      <td>
+        <button (click)="editUser(user)">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Formulaire d'édition utilisateur -->
+<div *ngIf="selectedUser" class="edit-form">
+  <h3>Edit User</h3>
+  <form (ngSubmit)="updateUser()">
+    <div>
+      <label for="username">Username</label>
+      <input [(ngModel)]="selectedUser.username" name="username" required>
+    </div>
+
+    <div>
+      <label for="role">Role</label>
+      <select [(ngModel)]="selectedUser.role" name="role" required>
+        <option value="admin">Admin</option>
+        <option value="instructor">Instructor</option>
+        <option value="student">Student</option>
+      </select>
+    </div>
+
+    <button type="submit">Update</button>
+    <button type="button" (click)="cancelEdit()">Cancel</button>
+  </form>
+</div>

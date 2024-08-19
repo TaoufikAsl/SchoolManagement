@@ -1,0 +1,4 @@
+2024-08-19 12:29:18.646 +02:00 [ERR] Failed executing DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Courses] DROP CONSTRAINT [FK_Courses_Students_StudentId];
+2024-08-19 12:29:46.445 +02:00 [ERR] Failed executing DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Courses] DROP CONSTRAINT [FK_Courses_Students_StudentId];

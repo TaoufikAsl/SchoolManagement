@@ -1,0 +1,21 @@
+<h2>Create a New Course</h2>
+
+<form (ngSubmit)="createCourse()" #courseForm="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Course Title</mat-label>
+    <input matInput placeholder="Enter course title" [(ngModel)]="newCourse.title" name="title" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Course Description</mat-label>
+    <textarea matInput placeholder="Enter course description" [(ngModel)]="newCourse.description" name="description" required></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="courseForm.invalid">
+    Create Course
+  </button>
+</form>
+
+<mat-error *ngIf="errorMessage">
+  {{ errorMessage }}
+</mat-error>

@@ -1,0 +1,5 @@
+2024-08-19 12:18:19.892 +02:00 [INF] Login attempt for user: student
+2024-08-19 12:18:21.045 +02:00 [INF] GetCourses called
+2024-08-19 12:18:21.047 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-19 12:29:18.646 +02:00 [ERR] Failed executing DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Courses] DROP CONSTRAINT [FK_Courses_Students_StudentId];

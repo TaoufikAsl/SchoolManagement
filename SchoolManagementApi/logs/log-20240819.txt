@@ -1,0 +1,10 @@
+2024-08-19 00:00:11.192 +02:00 [INF] Login attempt for user: student
+2024-08-19 00:00:12.639 +02:00 [INF] GetCourses called
+2024-08-19 00:00:12.642 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-19 00:06:47.283 +02:00 [INF] Login attempt for user: student
+2024-08-19 00:06:47.572 +02:00 [INF] GetCourses called
+2024-08-19 00:06:47.575 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-19 00:10:45.965 +02:00 [INF] GetCourses called
+2024-08-19 00:10:45.967 +02:00 [INF] User null with roles student is attempting to access /courses
+2024-08-19 00:10:47.291 +02:00 [INF] GetCourses called
+2024-08-19 00:10:47.293 +02:00 [INF] User null with roles student is attempting to access /courses
