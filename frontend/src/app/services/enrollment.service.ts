@@ -3,8 +3,11 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Enrollment } from '../models/enrollment.model';
+import { Student } from '../models/courses/student.model';
 import { AuthService } from './auth.service';
 import { error } from 'console';
+import { resolve } from 'path';
+import { rejects } from 'assert';
 
 
 @Injectable({
@@ -15,7 +18,7 @@ export class EnrollmentService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
 
@@ -38,13 +41,12 @@ export class EnrollmentService {
   }
 
   enrollStudent(studentId: number, courseId: number): Observable<any> {
-    const headers = this.getAuthHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const enrollmentData = { studentId, courseId };
-    return this.http.post(this.apiUrl, enrollmentData, { headers })
-      .pipe(
-        tap(() => console.log(`Student ${studentId} enrolled in course ${courseId}`)),
-        catchError(this.handleError)
-      );
+    return this.http.post(this.apiUrl, enrollmentData, { headers }).pipe(
+      tap(() => console.log(`Student ${studentId} enrolled in course ${courseId}`)),
+      catchError(this.handleError)
+    );
   }
 
   
@@ -59,7 +61,7 @@ export class EnrollmentService {
 
   getStudentCourses(userId: number): Observable<any> {
     console.log('USERIDDD',userId)
-    const studentId= this.getStudentId(userId)
+    const studentId= this.getStudentId(userId).then(res =>console.log('getstudentcourse',res))
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.apiUrl}/student/${studentId}/courses`, { headers }).pipe(
       tap(() => console.log(`Fetching courses for student ID: ${studentId}`)),
@@ -67,20 +69,22 @@ export class EnrollmentService {
     );
   }
   
-  getStudentId(userId:number):number{
-
-    let idStudent=0;
-    this.getStudentByUserId(userId).subscribe({
-      next: (student) => {
-        console.log('ETUDIANTID',student.id),
-        idStudent=student.id;
-      }, 
-      error:(err)=>{
-        console.error('etudiant id n a pas pu etre recup',err)
-      }
+   getStudentId(userId: number): Promise<number> {
+    
+    return new Promise((resolve, reject) => {
+       this.getStudentByUserId(userId).subscribe({
+        next:(student: Student)=>{
+          console.log('ETUDIANTID', student.id);
+          resolve(student.id); // Resolve with a number
+        },
+        error:(err)=>{
+          console.error(err),
+          reject('l etudiant n a pas pu etre recup par user')
+        }
+      });
     });
-    return idStudent
-  }
+  } 
+  
 
 
   private handleError(error: HttpErrorResponse) {
@@ -101,11 +105,10 @@ export class EnrollmentService {
     return this.http.get<Enrollment>(`${this.apiUrl}/enrollments/${id}`);
   }
 
-  getStudentByUserId(userid:number): Observable<any> {
+  getStudentByUserId(userid:number): Observable<Student> {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.apiUrl}/studentByUserId/${userid}`, { headers }).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<Student>(`${this.apiUrl}/studentByUserId/${userid}`, { headers })
+    ;
   }
   
 }

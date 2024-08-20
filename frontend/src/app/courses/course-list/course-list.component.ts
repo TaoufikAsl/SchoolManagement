@@ -36,6 +36,7 @@ export class CourseListComponent implements OnInit {
   userRole = ''; // Pour stocker le rôle de l'utilisateur
   userId = 0; // ID de l'utilisateur connecté (étudiant ou instructeur)
   enrollments: any[] = [];
+  studentId =0;
   
 
 
@@ -80,23 +81,35 @@ export class CourseListComponent implements OnInit {
   }
 
   // Charge les cours où l'étudiant est inscrit
-   loadEnrolledCourses(): void {
-    const user = this.authService.getLoggedInUser();
-    if (user && user.id) {
-     const studentId= this.enrollmentService.getStudentId(user.id)
-      console.log('studentIdUser',studentId)
-       this.enrollmentService.getStudentCourses(studentId).subscribe({
-        next: (courses: Course[]) => {
-          this.enrolledCourses = courses;
-        },
-        error: (error) => {
-          console.error('Erreur lors de la récupération des cours inscrits', error);
-        }
-      });
-    } else {
-      console.error('Utilisateur non connecté ou ID invalide');
+  async loadEnrolledCourses(): Promise<void> {
+
+    try { console.log('loadenrollcourse');
+      const user = this.authService.getLoggedInUser();
+      if (user && user.id) {
+        // Récupérer l'ID de l'étudiant en attendant la résolution de la promesse
+         await this.enrollmentService.getStudentId(user.id).then(res=>{
+          this.studentId=res,
+          console.log('RESSSSSSSS',res)},
+          );
+        console.log('studentIdUser', this.studentId);
+        console.log('studentIdUserType', typeof(this.studentId));
+
+        // Récupérer les cours de l'étudiant en attendant la résolution de la promesse
+        await this.enrollmentService.getStudentCourses(this.studentId).subscribe({
+        next:(response: Course[])=>{
+
+        // Mettre à jour la liste des cours inscrits
+        this.enrolledCourses = response;
+        console.log('GetStudentCourse',response);
+      }})} else {
+        console.error('Utilisateur non connecté ou ID invalide');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des cours inscrits', error);
     }
+    console.log('exit')
   }
+  
   
 
   // Vérifie si l'étudiant est déjà inscrit à un cours
@@ -134,22 +147,35 @@ export class CourseListComponent implements OnInit {
     }
   }
 
-  // Inscription d'un étudiant à un cours
-  enrollStudent(courseId: number) {
-    const studentId= this.enrollmentService.getStudentId(this.userId)
-    if (!studentId) {
-      this.showSnackbar('Erreur : impossible d\'identifier l\'étudiant');
-      return;
+  async enrollStudent(courseId: number): Promise<void> {
+    try {
+      console.log('enrollStudent');
+      // Attendre la récupération de l'ID de l'étudiant
+      const studentId = await this.enrollmentService.getStudentId(this.userId);
+  
+      // Vérifiez si l'ID de l'étudiant est valide
+      if (!studentId) {
+        this.showSnackbar('Erreur : impossible d\'identifier l\'étudiant');
+        return;
+      }
+  
+      console.log('COURS ID', courseId);
+  
+      // Inscrire l'étudiant au cours
+      await this.enrollmentService.enrollStudent(studentId, courseId).toPromise();
+      
+      // Afficher le message de succès
+      this.showSnackbar('Inscription réussie');
+      
+      // Recharger les cours inscrits
+      this.loadEnrolledCourses();
+    } catch (error) {
+      // Gérer les erreurs
+      this.handleError('Erreur lors de l\'inscription', error);
     }
-    console.log('COURS ID',courseId)
-    this.enrollmentService.enrollStudent(studentId, courseId).subscribe({
-      next: () => { 
-        this.showSnackbar('Inscription réussie');
-        this.loadEnrolledCourses(); // Recharger les cours inscrits
-      },
-      error: (err) => this.handleError('Erreur lors de l\'inscription', err)
-    });
   }
+  
+
 
   // Désinscription d'un étudiant d'un cours
   unenroll(courseId: number) {
