@@ -67,7 +67,7 @@ public class CoursesController : ControllerBase
 
         // Création de l'entité Course à partir du DTO
         var course = new Course
-        {
+    {
             Title = courseDto.Title,
             Description = courseDto.Description,
             InstructorId = instructor.Id
@@ -89,7 +89,7 @@ public class CoursesController : ControllerBase
         // Supposons que l'ID passé en paramètre est l'ID du cours
         var course = await _context.Courses.FindAsync(id); // Rechercher le cours par ID
         if (course == null)
-        {
+    {
             return NotFound(); // Si le cours n'existe pas
         }
 
@@ -112,7 +112,7 @@ public class CoursesController : ControllerBase
             else
             {
                 throw;
-            }
+        }
         }
 
         return NoContent(); // Réponse sans contenu pour indiquer que la mise à jour est réussie

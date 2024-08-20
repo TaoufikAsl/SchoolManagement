@@ -69,6 +69,7 @@ public class StudentEnrollmentsController : ControllerBase
         return CreatedAtAction(nameof(GetEnrollments), new { id = enrollment.Id }, enrollment);
     }
 
+    // Ajoutez une méthode DELETE si nécessaire pour permettre aux étudiants de se désinscrire
     [HttpDelete("{id}")]
     [Authorize(Roles = "admin,instructor,student")]
     public async Task<IActionResult> DeleteEnrollment(int id)

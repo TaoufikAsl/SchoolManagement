@@ -20,6 +20,8 @@ export class CourseService {
   // Méthode pour obtenir les en-têtes d'autorisation
   private getAuthHeaders(): HttpHeaders {
     const token = this.authService.getToken(); // Récupère le token JWT depuis le localStorage via AuthService
+    console.log('Token:', token); // Debug: vérifier si le token est récupéré
+
     if (token) {
       return new HttpHeaders().set('Authorization', `Bearer ${token}`);
     } else {
@@ -56,7 +58,7 @@ export class CourseService {
   getEnrolledCourses(studentId: number): Observable<Course[]> {
     return this.http.get<Course[]>(`https://localhost:7060/api/StudentEnrollments/student/${studentId}/courses`);
   }
-  
+
 
   // Met à jour un cours existant
   updateCourse(id: number, course: Course): Observable<any> {

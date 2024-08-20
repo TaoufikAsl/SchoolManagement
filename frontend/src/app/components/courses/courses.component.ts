@@ -1,15 +1,3 @@
-import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatListModule } from "@angular/material/list";
-import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
-import { Course } from "../../models/courses/course.model";
-import { CourseService } from "../../services/course.service";
-import { AuthService } from "../../services/auth.service";
-import { NewCourse } from "../../models/courses/new-course";
 
 @Component({
   selector: 'app-courses',
@@ -20,6 +8,7 @@ import { NewCourse } from "../../models/courses/new-course";
     CommonModule,
     FormsModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     MatListModule,
     MatButtonModule,
@@ -33,7 +22,7 @@ export class CoursesComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private courseService: CourseService,
+    private courseService: CourseService, 
     private snackBar: MatSnackBar,
     private authService: AuthService
   ) {}
@@ -43,15 +32,18 @@ export class CoursesComponent implements OnInit {
     this.setInstructorId();
   }
 
+  // Récupérer l'instructorId à partir d'AuthService
   setInstructorId() {
     const instructorId = this.authService.getInstructorId();
-    if (instructorId !== null && instructorId !== undefined) {
-      this.currentCourse.instructorId = instructorId;
+if (instructorId !== null && instructorId !== undefined) {
+  this.currentCourse.instructorId = instructorId;
     } else {
       this.showSnackbar('Failed to retrieve instructor ID');
-    }
+}
+
   }
 
+  // Méthode pour charger la liste des cours 
   loadCourses() {
     this.loading = true;
     this.courseService.getCourses().subscribe({
@@ -63,6 +55,7 @@ export class CoursesComponent implements OnInit {
     });
   }
 
+  // Méthode pour créer ou mettre à jour un cours
   createOrUpdateCourse() {
     if (!this.currentCourse.title || !this.currentCourse.description) {
       this.showSnackbar('Title and description are required');
@@ -90,6 +83,7 @@ export class CoursesComponent implements OnInit {
     });
   }
 
+  // Méthode pour mettre à jour un cours existant
   updateCourse(course: Course) {
     this.courseService.updateCourse(course.id!, course).subscribe({
       next: () => {
@@ -101,34 +95,39 @@ export class CoursesComponent implements OnInit {
     });
   }
 
+  // Méthode pour sélectionner un cours pour l'édition
   editCourse(course: Course) {
     // Pour l'édition, nous devons copier toutes les propriétés, y compris l'ID
     this.currentCourse = { ...course };
   }
 
+  // Méthode pour supprimer un cours
   deleteCourse(id: number) {
     if (confirm('Are you sure you want to delete this course?')) {
-      this.courseService.deleteCourse(id).subscribe({
-        next: () => {
-          this.courses = this.courses.filter(course => course.id !== id);
-          this.showSnackbar('Course deleted successfully');
-        },
-        error: (error) => this.handleError('Failed to delete course', error)
-      });
-    }
+    this.courseService.deleteCourse(id).subscribe({
+      next: () => {
+        this.courses = this.courses.filter(course => course.id !== id);
+        this.showSnackbar('Course deleted successfully');
+      },
+      error: (error) => this.handleError('Failed to delete course', error)
+    });
+  }
   }
 
+  // Réinitialise le formulaire après la création ou la mise à jour
   resetCurrentCourse() {
     // Après la création ou la mise à jour, réinitialisez le formulaire
     this.currentCourse = { title: '', description: '', instructorId: this.currentCourse.instructorId };
   }
 
+  // Gestion des erreurs
   private handleError(message: string, error: any) {
     console.error(message, error);
     this.errorMessage = message;
     this.showSnackbar(message);
   }
 
+  // Afficher une notification avec Snackbar
   private showSnackbar(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000

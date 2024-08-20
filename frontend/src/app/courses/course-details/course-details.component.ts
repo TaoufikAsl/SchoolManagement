@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { EnrollmentService } from '../../services/enrollment.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+
 @Component({
   selector: 'app-course-detail',
   standalone: true,

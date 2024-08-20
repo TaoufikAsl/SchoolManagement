@@ -21,18 +21,18 @@
 
 <!-- Formulaire pour créer un nouveau cours, visible uniquement pour les instructeurs -->
 <div *ngIf="isInstructor">
-  <h3>Créer un nouveau cours</h3>
-  <form #courseForm="ngForm" (ngSubmit)="createCourse(courseForm)">
-    <mat-form-field appearance="fill">
-      <mat-label>Titre du cours</mat-label>
-      <input matInput name="title" [(ngModel)]="newCourse.title" required>
-    </mat-form-field>
+<h3>Créer un nouveau cours</h3>
+<form #courseForm="ngForm" (ngSubmit)="createCourse(courseForm)">
+  <mat-form-field appearance="fill">
+    <mat-label>Titre du cours</mat-label>
+    <input matInput name="title" [(ngModel)]="newCourse.title" required>
+  </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <textarea matInput name="description" [(ngModel)]="newCourse.description" required></textarea>
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" [(ngModel)]="newCourse.description" required></textarea>
+  </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">Créer</button>
-  </form>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">Créer</button>
+</form>
 </div>

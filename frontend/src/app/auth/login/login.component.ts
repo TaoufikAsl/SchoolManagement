@@ -34,7 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class LoginComponent {
   user: User = { id:0 ,username: '', password: ''};
   errorMessage: string = '';
-  openSnackBar: any;
+openSnackBar: any;
   
   constructor(private authService: AuthService, private router: Router) {}
 
